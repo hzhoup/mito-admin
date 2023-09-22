@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "@mito/router": "workspace:*",
+    "@mito/store": "workspace:*",
+    "pinia": "^2.1.6",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   }
 }

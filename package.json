@@ -42,23 +42,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.vue": [
-      "prettier --parser=vue --write",
-      "eslint --fix"
-    ],
-    "*.json": [
-      "prettier --parser=json --write",
-      "eslint --fix"
-    ],
-    "*.md": [
-      "prettier --parser=markdown --write",
-      "eslint --fix"
-    ],
-    "*.yaml": "prettier --parser=yaml --write",
-    "*.scss": "prettier --parser=scss --write"
+    "*.{vue,js,ts,tsx,json,md}": "eslint --fix"
   }
 }
