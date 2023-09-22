@@ -1,0 +1,4 @@
+{
+  "extends": "@mito/ts-config/web.json",
+  "include": ["src"]
+}
