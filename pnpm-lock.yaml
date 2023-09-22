@@ -14,6 +14,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.7.0
         version: 17.7.0
+      '@mito/ts-config':
+        specifier: workspace:*
+        version: link:packages/ts-config
       '@types/node':
         specifier: '*'
         version: 20.6.3
@@ -68,6 +71,8 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
+
+  packages/ts-config: {}
 
 packages:
 
