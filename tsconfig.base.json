@@ -25,6 +25,7 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": false,
+    "types": ["vite/client"],
     "strictNullChecks": true
   },
   "exclude": ["node_modules", "dist", "coverage"]

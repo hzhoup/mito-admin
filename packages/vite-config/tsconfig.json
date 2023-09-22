@@ -1,4 +1,0 @@
-{
-  "extends": "@mito/ts-config/node.json",
-  "include": ["src"]
-}
