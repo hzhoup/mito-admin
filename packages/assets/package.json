@@ -1,0 +1,12 @@
+{
+  "name": "@mito/assets",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@unocss/reset": "^0.56.1"
+  }
+}

@@ -26,7 +26,11 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": false,
     "types": ["vite/client", "vite-plugin-pages/client"],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mito/*": ["packages/*/src"]
+    }
   },
   "exclude": ["node_modules", "dist", "coverage"]
 }
