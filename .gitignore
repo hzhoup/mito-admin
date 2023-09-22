@@ -1,0 +1,13 @@
+.idea
+.turbo
+.fleet
+.DS_Store
+
+dist
+coverage
+node_modules
+
+*.log
+.env.local
+.env.*.local
+.eslintcache
