@@ -4,8 +4,8 @@
     "composite": true,
     "jsx": "preserve",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "vite-plugin-pages/client", "element-plus/global"],
+    "types": ["element-plus/global"],
     "skipLibCheck": true
   },
-  "include": ["apps", "packages"]
+  "include": ["apps", "packages", "typing/**/*.d.ts"]
 }

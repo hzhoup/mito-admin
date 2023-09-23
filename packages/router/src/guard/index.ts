@@ -1,11 +1,14 @@
 import NProgress from 'nprogress'
+import { useTitle } from '@vueuse/core'
 import { useAppStoreWithOut } from '@mito/store'
+import { useLocale } from '@mito/locale'
 import type { Router } from 'vue-router'
 
 export function createRouterGuard(router: Router) {
   createPageLoadedGuard(router)
   createPageLoadingBarGuard(router)
   createNprogressGuard(router)
+  createPageTitleGuard(router)
 }
 
 function createPageLoadedGuard(router: Router) {
@@ -51,7 +54,17 @@ function createNprogressGuard(router: Router) {
   })
 
   router.afterEach(() => {
-    // NProgress.done()
+    NProgress.done()
     return true
+  })
+}
+
+function createPageTitleGuard(router: Router) {
+  const { getLocale } = useLocale()
+
+  router.afterEach((to) => {
+    const title = to.meta.title?.[getLocale]
+    const subTitle = import.meta.env.VITE_APP_TITLE
+    useTitle(title ? `${title} | ${subTitle}` : subTitle)
   })
 }
