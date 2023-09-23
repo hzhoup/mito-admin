@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import { LocaleKey } from '@mito/locale'
 import { store } from '../setupStore'
 

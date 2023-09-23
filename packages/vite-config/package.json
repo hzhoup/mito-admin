@@ -29,6 +29,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "unbuild": "^2.0.0",
     "unocss": "^0.56.1",
+    "unplugin-auto-import": "^0.16.6",
     "unplugin-icons": "^0.17.0",
     "unplugin-vue-components": "^0.25.2",
     "vite-plugin-pages": "^0.31.0"

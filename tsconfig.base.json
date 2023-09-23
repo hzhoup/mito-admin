@@ -25,7 +25,7 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": false,
-    "types": ["vite/client", "vite-plugin-pages/client"],
+    "types": ["vite/client", "vite-plugin-pages/client", "element-plus/global.d.ts"],
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {

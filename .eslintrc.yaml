@@ -12,6 +12,7 @@ extends:
   - plugin:vue/vue3-recommended
   - plugin:@typescript-eslint/recommended
   - plugin:prettier/recommended
+  - './apps/mito-admin/.eslintrc-auto-import.json'
 settings:
   'import/resolver':
     node:
@@ -105,3 +106,5 @@ rules:
   import/no-unresolved: off
 
   vue/multi-word-component-names: off
+
+  '@typescript-eslint/ban-ts-comment': off

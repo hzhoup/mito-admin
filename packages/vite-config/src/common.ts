@@ -1,14 +1,16 @@
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import pages from 'vite-plugin-pages'
-import unoCSS from 'unocss/vite'
+import Vue from '@vitejs/plugin-vue'
+import VueJsx from '@vitejs/plugin-vue-jsx'
+import Pages from 'vite-plugin-pages'
+import UnoCSS from 'unocss/vite'
 import { presetTypography, presetUno } from 'unocss'
+import AutoImport from 'unplugin-auto-import/vite'
 import transformerDirectives from '@unocss/transformer-directives'
-import components from 'unplugin-vue-components/vite'
-import icons from 'unplugin-icons/vite'
-import iconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import vueI18n from '@intlify/unplugin-vue-i18n/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import type { UserConfig } from 'vite'
 
 const commonConfig: UserConfig = {
@@ -20,25 +22,32 @@ const commonConfig: UserConfig = {
     chunkSizeWarningLimit: 1024
   },
   plugins: [
-    vue(),
-    vueJsx(),
-    pages({
+    Vue(),
+    VueJsx(),
+    Pages({
       extensions: ['vue'],
       exclude: ['**/components/**/*', '**/modules/**/*']
     }),
-    vueI18n({
+    VueI18n({
       jitCompilation: true
     }),
-    components({
-      dts: false,
+    AutoImport({
+      imports: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
+      resolvers: [ElementPlusResolver()],
+      eslintrc: {
+        enabled: true
+      }
+    }),
+    Components({
       resolvers: [
-        iconsResolver({
+        ElementPlusResolver(),
+        IconsResolver({
           componentPrefix: 'icon',
           customCollections: ['local']
         })
       ]
     }),
-    icons({
+    Icons({
       scale: 1,
       compiler: 'vue3',
       customCollections: {
@@ -47,7 +56,7 @@ const commonConfig: UserConfig = {
         )
       }
     }),
-    unoCSS({
+    UnoCSS({
       content: {
         pipeline: {
           exclude: ['node_modules', 'dist', 'public', 'mock']
