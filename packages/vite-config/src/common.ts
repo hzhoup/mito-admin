@@ -8,6 +8,7 @@ import components from 'unplugin-vue-components/vite'
 import icons from 'unplugin-icons/vite'
 import iconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+import vueI18n from '@intlify/unplugin-vue-i18n/vite'
 import type { UserConfig } from 'vite'
 
 const commonConfig: UserConfig = {
@@ -24,6 +25,9 @@ const commonConfig: UserConfig = {
     pages({
       extensions: ['vue'],
       exclude: ['**/components/**/*', '**/modules/**/*']
+    }),
+    vueI18n({
+      jitCompilation: true
     }),
     components({
       dts: false,
