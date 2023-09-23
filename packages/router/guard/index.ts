@@ -51,7 +51,7 @@ function createNprogressGuard(router: Router) {
   })
 
   router.afterEach(() => {
-    NProgress.done()
+    // NProgress.done()
     return true
   })
 }

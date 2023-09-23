@@ -3,9 +3,7 @@ import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Pages from 'vite-plugin-pages'
 import UnoCSS from 'unocss/vite'
-import { presetTypography, presetUno } from 'unocss'
 import AutoImport from 'unplugin-auto-import/vite'
-import transformerDirectives from '@unocss/transformer-directives'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
@@ -58,15 +56,7 @@ const commonConfig: UserConfig = {
         )
       }
     }),
-    UnoCSS({
-      content: {
-        pipeline: {
-          exclude: ['node_modules', 'dist', 'public', 'mock']
-        }
-      },
-      presets: [presetUno(), presetTypography()],
-      transformers: [transformerDirectives()]
-    })
+    UnoCSS()
   ]
 }
 

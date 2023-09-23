@@ -1,10 +1,9 @@
 #nprogress {
   .bar {
-    background: var(--el-color-primary);
+    @apply bg-primary;
   }
 
   .spinner-icon {
-    border-top-color: var(--el-color-primary);
-    border-left-color: var(--el-color-primary);
+    @apply border-t-primary border-l-primary;
   }
 }
