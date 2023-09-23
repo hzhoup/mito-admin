@@ -1,3 +1,4 @@
+import { resolve } from 'node:path'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Pages from 'vite-plugin-pages'
@@ -35,7 +36,8 @@ const commonConfig: UserConfig = {
       imports: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
       resolvers: [ElementPlusResolver()],
       eslintrc: {
-        enabled: true
+        enabled: true,
+        filepath: resolve(__dirname, '../../../.eslintrc-auto-import.json')
       }
     }),
     Components({

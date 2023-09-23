@@ -3,6 +3,6 @@ dist
 coverage
 node_modules
 
-**/.eslintrc-auto-import.json
+.eslintrc-auto-import.json
 **/auto-imports.d.ts
 **/components.d.ts
