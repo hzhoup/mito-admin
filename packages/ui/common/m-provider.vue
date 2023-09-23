@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="appStore.loading" class="h-full">
+  <div v-loading="appStore.getPageLoading" class="h-full">
     <el-config-provider :button="{ autoInsertSpace: true }" :locale="getElLocale">
       <slot />
     </el-config-provider>
