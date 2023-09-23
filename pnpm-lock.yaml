@@ -26,6 +26,9 @@ importers:
       '@mito/store':
         specifier: workspace:*
         version: link:packages/store
+      '@mito/ui':
+        specifier: workspace:*
+        version: link:packages/ui
       '@mito/vite-config':
         specifier: workspace:*
         version: link:packages/vite-config
@@ -89,12 +92,18 @@ importers:
       '@mito/assets':
         specifier: workspace:*
         version: link:../../packages/assets
+      '@mito/locale':
+        specifier: workspace:*
+        version: link:../../packages/locale
       '@mito/router':
         specifier: workspace:*
         version: link:../../packages/router
       '@mito/store':
         specifier: workspace:*
         version: link:../../packages/store
+      '@mito/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       element-plus:
         specifier: ^2.3.14
         version: 2.3.14(vue@3.3.4)
@@ -149,6 +158,18 @@ importers:
       vue:
         specifier: ^3.3.4
         version: 3.3.4
+
+  packages/ui:
+    dependencies:
+      element-plus:
+        specifier: ^2.3.14
+        version: 2.3.14(vue@3.3.4)
+      vue:
+        specifier: ^3.3.4
+        version: 3.3.4
+      vue-i18n:
+        specifier: ^9.4.1
+        version: 9.4.1(vue@3.3.4)
 
   packages/vite-config:
     dependencies:
@@ -3856,6 +3877,7 @@ packages:
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+    requiresBuild: true
     dev: true
 
   /js-yaml@4.1.0:

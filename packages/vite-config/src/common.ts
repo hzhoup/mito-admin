@@ -36,7 +36,7 @@ const commonConfig: UserConfig = {
       imports: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
       resolvers: [ElementPlusResolver()],
       eslintrc: {
-        enabled: true,
+        enabled: false,
         filepath: resolve(__dirname, '../../../.eslintrc-auto-import.json')
       }
     }),
