@@ -19,6 +19,10 @@
         <el-input v-model="model.email" :placeholder="t('email.placeholder')" />
       </el-form-item>
 
+      <el-form-item :label="t('phone.label')">
+        <i18n-phone v-model:code="model.code" v-model:phone="model.phone" />
+      </el-form-item>
+
       <el-row :gutter="12">
         <el-col :span="12">
           <el-form-item prop="password" :label="t('password.label')">
@@ -32,7 +36,7 @@
         </el-col>
       </el-row>
 
-      <el-form-item>
+      <el-form-item size="small">
         <el-checkbox v-model="model.policy">
           <el-text>
             <el-text>{{ t('policy.label') }}</el-text>
@@ -51,6 +55,8 @@
 </template>
 
 <script setup lang="ts">
+import { I18nPhone } from '@mito/ui'
+
 const emit = defineEmits<{
   change: [key: string]
 }>()
@@ -60,6 +66,8 @@ const { t } = useI18n()
 const model = reactive({
   username: '',
   email: '',
+  code: '',
+  phone: '',
   password: '',
   confirmPwd: '',
   policy: false
@@ -78,6 +86,8 @@ zh-cn:
   email:
     label: 邮箱
     placeholder: 请输入邮箱
+  phone:
+    label: 手机号
   password:
     label: 密码
     placeholder: 请输入密码
@@ -100,6 +110,8 @@ en:
   email:
     label: Email
     placeholder: Please enter your email
+  phone:
+    label: Phone
   password:
     label: Password
     placeholder: Please enter your password

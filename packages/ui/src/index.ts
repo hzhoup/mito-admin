@@ -4,4 +4,6 @@ import ToggleLang from './common/toggle-lang.vue'
 
 import ToggleMode from './common/toggle-mode.vue'
 
-export { MProvider, ToggleLang, ToggleMode }
+import I18nPhone from './common/i18n-phone/index.vue'
+
+export { MProvider, ToggleLang, ToggleMode, I18nPhone }
