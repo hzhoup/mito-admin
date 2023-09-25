@@ -1,8 +1,9 @@
 <template>
   <div class="px-4 relative">
-    <div class="absolute top-6 right-6">
+    <el-space class="absolute top-6 right-4">
       <toggle-lang />
-    </div>
+      <toggle-mode />
+    </el-space>
 
     <main>
       <transition name="fade-slide" mode="out-in" appear>
@@ -13,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ToggleLang } from '@mito/ui'
+import { ToggleLang, ToggleMode } from '@mito/ui'
 import PwdAccount from './components/pwd-account.vue'
 import SignUp from './components/sign-up.vue'
 

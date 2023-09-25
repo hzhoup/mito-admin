@@ -40,7 +40,7 @@
           <template #icon>
             <el-icon size="20"><icon-local-wechat /></el-icon>
           </template>
-          <el-text>{{ t('wechat') }}</el-text>
+          {{ t('wechat') }}
         </el-button>
       </el-col>
       <el-col :span="12">
@@ -48,7 +48,7 @@
           <template #icon>
             <el-icon size="20"><icon-local-dingtalk /></el-icon>
           </template>
-          <el-text>{{ t('dingtalk') }}</el-text>
+          {{ t('dingtalk') }}
         </el-button>
       </el-col>
     </el-row>
