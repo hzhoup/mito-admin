@@ -12,6 +12,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@iconify-json/mdi": "^1.1.54",
     "@mito/assets": "workspace:*",
     "@mito/locale": "workspace:*",
     "@mito/router": "workspace:*",

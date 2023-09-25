@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-  import { MProvider } from '@mito/ui'
+import { MProvider } from '@mito/ui'
 </script>

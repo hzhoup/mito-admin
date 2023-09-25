@@ -31,6 +31,7 @@ const commonConfig: UserConfig = {
       jitCompilation: true
     }),
     AutoImport({
+      dts: resolve(__dirname, '../../../auto-imports.d.ts'),
       imports: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
       resolvers: [ElementPlusResolver()],
       eslintrc: {

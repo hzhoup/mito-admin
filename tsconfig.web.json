@@ -7,5 +7,5 @@
     "types": ["element-plus/global"],
     "skipLibCheck": true
   },
-  "include": ["apps", "packages", "typing/**/*.d.ts"]
+  "include": ["apps", "packages", "typing/**/*.d.ts", "./auto-imports.d.ts"]
 }

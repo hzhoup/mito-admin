@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-  import { useLocale } from '@mito/locale'
-  import { useAppStore } from '@mito/store'
+import { useLocale } from '@mito/locale'
+import { useAppStore } from '@mito/store'
 
-  const appStore = useAppStore()
-  const { getElLocale } = useLocale()
+const appStore = useAppStore()
+const { getElLocale } = useLocale()
 </script>
