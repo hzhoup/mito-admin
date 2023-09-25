@@ -16,7 +16,8 @@ export const useLocaleStore = defineStore({
     getLocale(state): LocaleKey {
       return state.locale || 'zh-cn'
     }
-  }
+  },
+  persist: true
 })
 
 export const useLocaleStoreWithOut = () => useLocaleStore(store)

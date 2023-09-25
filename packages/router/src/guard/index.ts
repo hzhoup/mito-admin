@@ -2,12 +2,14 @@ import NProgress from 'nprogress'
 import { useTitle } from '@vueuse/core'
 import { useAppStoreWithOut } from '@mito/store'
 import { useLocale } from '@mito/locale'
+import { createPermissionGuard } from './permission'
 import type { Router } from 'vue-router'
 
 export function createRouterGuard(router: Router) {
   createPageLoadedGuard(router)
   createPageLoadingBarGuard(router)
   createNprogressGuard(router)
+  createPermissionGuard(router)
   createPageTitleGuard(router)
 }
 
