@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mt-12">
+  <div class="w-full pt-12">
     <el-space direction="vertical" alignment="flex-start">
       <div class="text-2xl">{{ t('welcome') }}</div>
       <div>
@@ -90,7 +90,7 @@ en:
   dingtalk: DingTalk
   username:
     label: Username
-    placeholder: Please enter your username / email / mobile number
+    placeholder: Please enter your username / email / phone
   password:
     label: Password
     placeholder: Please enter your password

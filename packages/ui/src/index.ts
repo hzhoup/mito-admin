@@ -1,3 +1,5 @@
 import MProvider from './common/m-provider.vue'
 
-export { MProvider }
+import ToggleLang from './common/toggle-lang.vue'
+
+export { MProvider, ToggleLang }

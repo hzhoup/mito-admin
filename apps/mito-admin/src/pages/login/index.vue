@@ -1,12 +1,19 @@
 <template>
-  <div class="px-4">
+  <div class="px-4 relative">
+    <div class="absolute top-6 right-6">
+      <toggle-lang />
+    </div>
+
     <main>
-      <component :is="getActiveModule" @change="changeModule" />
+      <transition name="fade-slide" mode="out-in" appear>
+        <component :is="getActiveModule" @change="changeModule" />
+      </transition>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ToggleLang } from '@mito/ui'
 import PwdAccount from './components/pwd-account.vue'
 import SignUp from './components/sign-up.vue'
 

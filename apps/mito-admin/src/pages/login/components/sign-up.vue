@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mt-12">
+  <div class="w-full pt-12">
     <el-space direction="vertical" alignment="flex-start">
       <div class="text-2xl">{{ t('signup') }}</div>
       <div>

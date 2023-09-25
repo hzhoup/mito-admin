@@ -7,10 +7,10 @@ export function setHtmlPageLang(locale: LocaleKey) {
 }
 
 export const localeOptions = [
-  { label: '简体中文', key: 'zh-cn' },
-  { label: 'English', key: 'en' }
+  { label: '简体中文', value: 'zh-cn' },
+  { label: 'English', value: 'en' }
 ] as const
 
-export type LocaleKey = (typeof localeOptions)[number]['key']
+export type LocaleKey = (typeof localeOptions)[number]['value']
 
-export const availableLocales: LocaleKey[] = localeOptions.map((locale) => locale.key)
+export const availableLocales: LocaleKey[] = localeOptions.map((locale) => locale.value)

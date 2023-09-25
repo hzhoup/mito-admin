@@ -17,6 +17,11 @@ export const useLocaleStore = defineStore({
       return state.locale || 'zh-cn'
     }
   },
+  actions: {
+    setLocale(locale: LocaleKey) {
+      this.locale = locale
+    }
+  },
   persist: true
 })
 
