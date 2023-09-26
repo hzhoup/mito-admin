@@ -10,7 +10,7 @@
       </div>
     </el-space>
 
-    <el-form :model="model" size="large" class="mt-6" label-position="top">
+    <el-form :model="model" :rules="rules" size="large" class="mt-6" label-position="top">
       <el-form-item prop="username" :label="t('username.label')">
         <el-input v-model="model.username" :placeholder="t('username.placeholder')" />
       </el-form-item>
@@ -19,7 +19,7 @@
         <el-input v-model="model.email" :placeholder="t('email.placeholder')" />
       </el-form-item>
 
-      <el-form-item :label="t('phone.label')">
+      <el-form-item prop="phone" :label="t('phone.label')">
         <i18n-phone v-model:code="model.code" v-model:phone="model.phone" />
       </el-form-item>
 
@@ -56,6 +56,7 @@
 
 <script setup lang="ts">
 import { I18nPhone } from '@mito/ui'
+import type { FormRules } from 'element-plus'
 
 const emit = defineEmits<{
   change: [key: string]
@@ -63,7 +64,16 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-const model = reactive({
+interface RegisterForm {
+  username: string
+  email: string
+  code: string
+  phone: string
+  password: string
+  confirmPwd: string
+  policy: boolean
+}
+const model = reactive<RegisterForm>({
   username: '',
   email: '',
   code: '',
@@ -72,6 +82,36 @@ const model = reactive({
   confirmPwd: '',
   policy: false
 })
+const rules: FormRules<RegisterForm> = {
+  username: [
+    { required: true, message: t('username.required') },
+    { min: 3, max: 20, message: t('username.length'), trigger: 'blur' }
+  ],
+  email: [
+    { required: true, message: t('email.required') },
+    { type: 'email', message: t('email.format'), trigger: 'blur' }
+  ],
+  phone: [{ required: true, message: t('phone.required'), trigger: 'blur' }],
+  password: [
+    { required: true, message: t('password.required') },
+    { min: 6, max: 20, message: t('password.length'), trigger: 'blur' }
+  ],
+  confirmPwd: [
+    {
+      required: true,
+      validator: (_, value, callback) => {
+        if (value === '') {
+          callback(new Error(t('password.required')))
+        } else if (value !== model.password) {
+          callback(new Error(t('confirmPwd.error')))
+        } else {
+          callback()
+        }
+      }
+    }
+  ],
+  policy: [{ validator: (_, value, callback) => (value ? callback() : callback(new Error(t('policy.required')))) }]
+}
 </script>
 
 <i18n lang="yaml">
@@ -83,22 +123,32 @@ zh-cn:
   username:
     label: 用户名
     placeholder: 请输入用户名
+    required: 请输入用户名
+    length: 用户名长度在 3 到 20 个字符
   email:
     label: 邮箱
     placeholder: 请输入邮箱
+    required: 请输入邮箱
+    format: 请输入正确的邮箱格式
   phone:
     label: 手机号
+    placeholder: 请输入手机号
+    required: 请输入手机号
   password:
     label: 密码
     placeholder: 请输入密码
+    required: 请输入密码
+    length: 密码长度为6-20位
   confirmPwd:
     label: 确认密码
     placeholder: 请再次输入密码
+    error: 两次输入密码不一致
   policy:
     label: 我已阅读并同意
     link: 《隐私政策》
     text: 和
     link2: 《服务条款》
+    required: 请阅读并同意隐私政策和服务条款
 en:
   signup: Sign Up
   login:
@@ -107,20 +157,30 @@ en:
   username:
     label: Username
     placeholder: Please enter your username
+    required: Please enter your username
+    length: Username length is 3-20 bits
   email:
     label: Email
     placeholder: Please enter your email
+    required: Please enter your email
+    format: Please enter the correct email format
   phone:
     label: Phone
+    placeholder: Please enter your phone
+    required: Please enter your phone
   password:
     label: Password
     placeholder: Please enter your password
+    required: Please enter your password
+    length: Password length is 6-20 bits
   confirmPwd:
     label: Confirm Password
     placeholder: Please enter your password again
+    error: The two passwords entered are inconsistent
   policy:
     label: I have read and agree to the
     link: Privacy Policy
     text: and
     link2: Terms of Service
+    required: Please read and agree to the Privacy Policy and Terms of Service
 </i18n>

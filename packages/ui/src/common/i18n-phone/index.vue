@@ -5,7 +5,7 @@
         <el-option
           v-for="option in countryList"
           :key="option.country_code"
-          :label="getCountrySelectLabel(option)"
+          :label="option.label"
           :value="option.phone_code" />
       </el-select>
     </template>
@@ -30,13 +30,15 @@ const emit = defineEmits<{
 const { t } = useI18n()
 const { getLocale } = useLocale()
 
-const countryList = countries
-
-function getCountrySelectLabel(option: any) {
-  return getLocale === 'zh-cn'
-    ? `${option.chinese_name}(${option.country_code}) +${option.phone_code}`
-    : `${option.english_name}(${option.country_code}) +${option.phone_code}`
-}
+const countryList = computed(() => {
+  return countries.map((item) => {
+    const label =
+      getLocale === 'zh-cn'
+        ? `${item.chinese_name}(${item.country_code}) +${item.phone_code}`
+        : `${item.english_name}(${item.country_code}) +${item.phone_code}`
+    return { ...item, label }
+  })
+})
 
 const code = computed({
   get() {

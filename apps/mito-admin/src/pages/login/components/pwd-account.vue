@@ -10,7 +10,7 @@
       </div>
     </el-space>
 
-    <el-form :model="model" size="large" class="mt-6">
+    <el-form :model="model" :rules="rules" size="large" class="mt-6">
       <el-form-item prop="username">
         <el-input v-model="model.username" :placeholder="t('username.placeholder')">
           <template #prefix>
@@ -56,16 +56,29 @@
 </template>
 
 <script setup lang="ts">
+import type { FormRules } from 'element-plus'
+
 const emit = defineEmits<{
   change: [key: string]
 }>()
 
 const { t } = useI18n()
 
-const model = reactive({
+interface LoginForm {
+  username: string
+  password: string
+}
+const model = reactive<LoginForm>({
   username: '',
   password: ''
 })
+const rules: FormRules<LoginForm> = {
+  username: [{ required: true, message: t('username.required') }],
+  password: [
+    { required: true, message: t('password.required') },
+    { min: 6, max: 20, message: t('password.length'), trigger: 'blur' }
+  ]
+}
 </script>
 
 <i18n lang="yaml">
@@ -77,9 +90,12 @@ zh-cn:
   username:
     label: 用户名
     placeholder: 请输入用户名 / 邮箱 / 手机号
+    required: 请输入用户名 / 邮箱 / 手机号
   password:
     label: 密码
     placeholder: 请输入密码
+    required: 请输入密码
+    length: 密码长度为6-20位
   register:
     message: 还没有账号？
     button: 注册
@@ -91,9 +107,12 @@ en:
   username:
     label: Username
     placeholder: Please enter your username / email / phone
+    required: Please enter your username / email / phone
   password:
     label: Password
     placeholder: Please enter your password
+    required: Please enter your password
+    length: Password length is 6-20 bits
   register:
     message: Don't have an account?
     button: Sign Up
