@@ -1,12 +1,17 @@
 <template>
-  <el-input v-model="phone" :placeholder="t('placeholder')">
+  <el-input
+    :model-value="modelValue.phone"
+    :placeholder="t('placeholder')"
+    @input="(v) => handleChangeProperty(v, 'phone')"
+  >
     <template #prepend>
-      <el-select v-model="code" style="width: 120px">
+      <el-select :model-value="modelValue.code" style="width: 110px" @change="(v) => handleChangeProperty(v, 'code')">
         <el-option
           v-for="option in countryList"
           :key="option.country_code"
           :label="option.label"
-          :value="option.phone_code" />
+          :value="option.phone_code"
+        />
       </el-select>
     </template>
   </el-input>
@@ -14,52 +19,38 @@
 
 <script setup lang="ts">
 import { useLocale } from '@mito/locale'
-import countries from './countries.json'
+import countries from './countries'
 
 defineOptions({ name: 'I18nPhone' })
-
-const props = defineProps<{
-  code: string
-  phone: string
-}>()
-const emit = defineEmits<{
-  'update:code': [key: string]
-  'update:phone': [key: string]
-}>()
 
 const { t } = useI18n()
 const { getLocale } = useLocale()
 
 const countryList = computed(() => {
-  return countries.map((item) => {
-    const label =
-      getLocale === 'zh-cn'
-        ? `${item.chinese_name}(${item.country_code}) +${item.phone_code}`
-        : `${item.english_name}(${item.country_code}) +${item.phone_code}`
-    return { ...item, label }
-  })
+  const key = toValue(getLocale) === 'zh-cn' ? 'chinese_name' : 'english_name'
+  return countries.map((item) => ({
+    ...item,
+    label: `${item[key]} +${item.phone_code}`
+  }))
 })
 
-const code = computed({
-  get() {
-    return props.code
-  },
-  set(val) {
-    emit('update:code', val)
+interface ModelValue {
+  code: string
+  phone: string
+}
+const props = defineProps({
+  modelValue: {
+    type: Object as PropType<ModelValue>,
+    default: () => ({ code: '86', phone: '' })
   }
 })
-const phone = computed({
-  get() {
-    return props.phone
-  },
-  set(val) {
-    emit('update:phone', val)
-  }
-})
+const emit = defineEmits<{
+  'update:modelValue': [value: ModelValue]
+}>()
 
-onMounted(() => {
-  if (!code.value) code.value = getLocale === 'zh-cn' ? '86' : '1'
-})
+function handleChangeProperty(value: string, key: string) {
+  emit('update:modelValue', { ...props.modelValue, [key]: value })
+}
 </script>
 
 <i18n lang="yaml">

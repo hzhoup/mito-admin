@@ -65,7 +65,7 @@ function createPageTitleGuard(router: Router) {
   const { getLocale } = useLocale()
 
   router.afterEach((to) => {
-    const title = to.meta.title?.[getLocale]
+    const title = to.meta.title?.[toValue(getLocale)]
     const subTitle = import.meta.env.VITE_APP_TITLE
     useTitle(title ? `${title} | ${subTitle}` : subTitle)
   })

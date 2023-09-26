@@ -3,4 +3,4 @@ endOfLine: lf
 printWidth: 120
 singleQuote: true
 trailingComma: none
-bracketSameLine: true
+bracketSameLine: false

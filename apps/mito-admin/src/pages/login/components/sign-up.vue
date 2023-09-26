@@ -10,7 +10,15 @@
       </div>
     </el-space>
 
-    <el-form :model="model" :rules="rules" size="large" class="mt-6" label-position="top">
+    <el-form
+      ref="formRef"
+      :model="model"
+      :rules="rules"
+      size="large"
+      class="mt-6"
+      label-position="top"
+      hide-required-asterisk
+    >
       <el-form-item prop="username" :label="t('username.label')">
         <el-input v-model="model.username" :placeholder="t('username.placeholder')" />
       </el-form-item>
@@ -19,8 +27,8 @@
         <el-input v-model="model.email" :placeholder="t('email.placeholder')" />
       </el-form-item>
 
-      <el-form-item prop="phone" :label="t('phone.label')">
-        <i18n-phone v-model:code="model.code" v-model:phone="model.phone" />
+      <el-form-item prop="country.phone" :label="t('country.phone.label')">
+        <i18n-phone v-model="model.country" />
       </el-form-item>
 
       <el-row :gutter="12">
@@ -48,7 +56,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" class="w-full">{{ t('signup') }}</el-button>
+        <el-button type="primary" class="w-full" @click="registerForm(formRef)">{{ t('signup') }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -56,7 +64,7 @@
 
 <script setup lang="ts">
 import { I18nPhone } from '@mito/ui'
-import type { FormRules } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
 
 const emit = defineEmits<{
   change: [key: string]
@@ -64,44 +72,41 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-interface RegisterForm {
-  username: string
-  email: string
+interface CountryCode {
   code: string
   phone: string
-  password: string
-  confirmPwd: string
-  policy: boolean
 }
-const model = reactive<RegisterForm>({
-  username: '',
-  email: '',
-  code: '',
-  phone: '',
-  password: '',
-  confirmPwd: '',
-  policy: false
-})
+interface RegisterForm {
+  username?: string
+  email?: string
+  country?: CountryCode
+  password?: string
+  confirmPwd?: string
+  policy?: boolean
+}
+
+const formRef = ref<FormInstance>()
+const model = reactive<RegisterForm>({})
 const rules: FormRules<RegisterForm> = {
   username: [
     { required: true, message: t('username.required') },
-    { min: 3, max: 20, message: t('username.length'), trigger: 'blur' }
+    { min: 3, max: 20, message: t('username.length') }
   ],
   email: [
     { required: true, message: t('email.required') },
-    { type: 'email', message: t('email.format'), trigger: 'blur' }
+    { type: 'email', message: t('email.format') }
   ],
-  phone: [{ required: true, message: t('phone.required'), trigger: 'blur' }],
+  'country.phone': [{ required: true, message: t('country.phone.required') }],
   password: [
     { required: true, message: t('password.required') },
-    { min: 6, max: 20, message: t('password.length'), trigger: 'blur' }
+    { min: 6, max: 20, message: t('password.length') }
   ],
   confirmPwd: [
     {
       required: true,
       validator: (_, value, callback) => {
         if (value === '') {
-          callback(new Error(t('password.required')))
+          callback(new Error(t('confirmPwd.required')))
         } else if (value !== model.password) {
           callback(new Error(t('confirmPwd.error')))
         } else {
@@ -110,7 +115,18 @@ const rules: FormRules<RegisterForm> = {
       }
     }
   ],
-  policy: [{ validator: (_, value, callback) => (value ? callback() : callback(new Error(t('policy.required')))) }]
+  policy: [
+    {
+      validator: (_, value, callback) => (value ? callback() : callback(new Error(t('policy.required'))))
+    }
+  ]
+}
+
+const registerForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    console.log(valid, fields)
+  })
 }
 </script>
 
@@ -130,10 +146,10 @@ zh-cn:
     placeholder: 请输入邮箱
     required: 请输入邮箱
     format: 请输入正确的邮箱格式
-  phone:
-    label: 手机号
-    placeholder: 请输入手机号
-    required: 请输入手机号
+  country:
+    phone:
+      label: 手机号
+      required: 请输入手机号
   password:
     label: 密码
     placeholder: 请输入密码
@@ -142,6 +158,7 @@ zh-cn:
   confirmPwd:
     label: 确认密码
     placeholder: 请再次输入密码
+    required: 请再次输入密码
     error: 两次输入密码不一致
   policy:
     label: 我已阅读并同意
@@ -164,10 +181,10 @@ en:
     placeholder: Please enter your email
     required: Please enter your email
     format: Please enter the correct email format
-  phone:
-    label: Phone
-    placeholder: Please enter your phone
-    required: Please enter your phone
+  country:
+    phone:
+      label: Phone Number
+      required: Please enter your phone number
   password:
     label: Password
     placeholder: Please enter your password
@@ -176,6 +193,7 @@ en:
   confirmPwd:
     label: Confirm Password
     placeholder: Please enter your password again
+    required: Please enter your password again
     error: The two passwords entered are inconsistent
   policy:
     label: I have read and agree to the

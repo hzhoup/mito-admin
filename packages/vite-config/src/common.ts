@@ -21,11 +21,7 @@ const commonConfig: UserConfig = {
     chunkSizeWarningLimit: 1024
   },
   plugins: [
-    Vue({
-      script: {
-        defineModel: true
-      }
-    }),
+    Vue(),
     VueJsx(),
     Pages({
       extensions: ['vue'],

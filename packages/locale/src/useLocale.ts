@@ -1,6 +1,7 @@
 import { useLocaleStoreWithOut } from '@mito/store'
 import { LocaleKey, loadedLocalePool, setHtmlPageLang } from './helper'
 import { i18n } from './setupI18n'
+import type { Ref } from 'vue'
 
 function setI18nLanguage(locale: LocaleKey) {
   const localeStore = useLocaleStoreWithOut()
@@ -16,13 +17,15 @@ function setI18nLanguage(locale: LocaleKey) {
 
 type UseLocaleReturnType = {
   t: typeof i18n.global.t
-  getLocale: LocaleKey
+  getLocale: Ref<LocaleKey>
   getElLocale: any
   changeLocale: (locale: LocaleKey) => Promise<LocaleKey | null>
 }
 
 export function useLocale(): UseLocaleReturnType {
   const localeStore = useLocaleStoreWithOut()
+
+  const getLocale = computed(() => localeStore.getLocale)
 
   const getElLocale = computed(() => {
     // @ts-expect-error
@@ -50,7 +53,7 @@ export function useLocale(): UseLocaleReturnType {
 
   return {
     t: i18n.global.t,
-    getLocale: localeStore.getLocale,
+    getLocale,
     getElLocale,
     changeLocale
   }

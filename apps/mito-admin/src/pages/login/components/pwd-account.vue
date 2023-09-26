@@ -10,7 +10,7 @@
       </div>
     </el-space>
 
-    <el-form :model="model" :rules="rules" size="large" class="mt-6">
+    <el-form ref="formRef" :model="model" :rules="rules" size="large" class="mt-6">
       <el-form-item prop="username">
         <el-input v-model="model.username" :placeholder="t('username.placeholder')">
           <template #prefix>
@@ -26,7 +26,7 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="w-full">{{ t('login') }}</el-button>
+        <el-button type="primary" class="w-full" @click="registerForm(formRef)">{{ t('login') }}</el-button>
       </el-form-item>
     </el-form>
 
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormRules } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
 
 const emit = defineEmits<{
   change: [key: string]
@@ -68,6 +68,8 @@ interface LoginForm {
   username: string
   password: string
 }
+
+const formRef = ref<FormInstance>()
 const model = reactive<LoginForm>({
   username: '',
   password: ''
@@ -78,6 +80,13 @@ const rules: FormRules<LoginForm> = {
     { required: true, message: t('password.required') },
     { min: 6, max: 20, message: t('password.length'), trigger: 'blur' }
   ]
+}
+
+const registerForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    console.log(valid, fields)
+  })
 }
 </script>
 
