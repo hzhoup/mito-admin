@@ -22,9 +22,5 @@
     "json",
     "jsonc"
   ],
-  "cSpell.words": ["mito"],
-  "i18n-ally.localesPaths": "packages/locale/src/lang",
-  "i18n-ally.enabledParsers": ["ts"],
-  "i18n-ally.enabledFrameworks": ["vue", "vue-sfc"],
-  "i18n-ally.keystyle": "nested"
+  "cSpell.words": ["mito"]
 }
